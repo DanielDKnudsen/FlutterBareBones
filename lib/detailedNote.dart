@@ -27,6 +27,12 @@ class DetailedNoteState extends State<DetailedNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: MaterialButton(
+          onPressed: () {
+            Navigator.pop(context, selectedNote.getReadState);
+          },
+          child: Icon(Icons.arrow_back, color: Colors.white),
+        ),
         title: Text(selectedNote.getTitle),
         backgroundColor: Colors.deepOrange,
       ),
@@ -40,9 +46,18 @@ class DetailedNoteState extends State<DetailedNote> {
                 style: TextStyle(fontSize: 20.0),
               ),
             ),
-            Checkbox(
-                value: selectedNote.getReadState,
-                onChanged: _handleReadCheckBox)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Read ?',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+                Checkbox(
+                    value: selectedNote.getReadState,
+                    onChanged: _handleReadCheckBox)
+              ],
+            )
           ],
         ),
       ),
